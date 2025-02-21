@@ -1,6 +1,24 @@
+# Repository klonen, falls es noch nicht vorhanden ist
+import os
+
+repo_url = "https://github.com/rim-the-optimizer/VRPOD.git"
+repo_name = "VRPOD"
+
+if not os.path.exists(repo_name):
+    !git clone {repo_url}
+    print("✅ Repository wurde geklont.")
+else:
+    print("✅ Repository existiert bereits.")
+
+# In den Repository-Ordner wechseln
+os.chdir(repo_name)
+
 !pip install matplotlib
 !pip install gurobipy
 !pip install networkx
+
+
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import gurobipy as gp
@@ -8,25 +26,30 @@ from gurobipy import GRB, quicksum
 import random as rd
 import math as mt
 
-"""                         Params to be set 
+
+
+"""                         Params to be set
 """
 
 zeta=1.1 # detour that the driver would take
 ODs=13 # amount of ODs |K|
-rho=0.2 # compensation rate 
+rho=0.2 # compensation rate
 
 
 """
                            Create Data Modell
 
 """
-#paths of solomon instances                
-C101='C:/Users/rimbr/Desktop/Masterarbeit 2022/Python Kurs/Solomon Instances/c101.txt' 
-C201='C:/Users/rimbr/Desktop/Masterarbeit 2022/Python Kurs/Solomon Instances/c201 - Kopie.txt' # damit ich nicht überall neu eintippen muss
-R101='C:/Users/rimbr/Desktop/Masterarbeit 2022/Python Kurs/Solomon Instances/r101.txt'  
-R201='C:/Users/rimbr/Desktop/Masterarbeit 2022/Python Kurs/Solomon Instances/r201.txt' 
-RC101='C:/Users/rimbr/Desktop/Masterarbeit 2022/Python Kurs/Solomon Instances/rc101.txt' 
-RC201='C:/Users/rimbr/Desktop/Masterarbeit 2022/Python Kurs/Solomon Instances/rc201.txt' 
+#paths of solomon instances
+
+data_folder = os.path.join(os.getcwd(), "data")
+
+C101 = os.path.join(data_folder, "c101.txt")
+C201= os.path.join(data_folder, "c201 - Kopie.txt")
+R101= os.path.join(data_folder, "r101.txt")
+R201= os.path.join(data_folder, "r201.txt")
+RC101= os.path.join(data_folder, "rc101.txt")
+RC201= os.path.join(data_folder, "rc201.txt")
 #startrow accoarding to file
 start_row=10 #exclusing depot
 start_row0=9 # depot inclusive
